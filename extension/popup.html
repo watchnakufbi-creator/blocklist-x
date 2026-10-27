@@ -6,11 +6,11 @@
 <section id="warning" hidden aria-labelledby="warning-title">
 <h2 id="warning-title">Avant de commencer</h2>
 <p>Vous êtes responsable des listes que vous importez. Les blocages en masse peuvent entraîner des limitations de compte par X. Vérifiez vos listes avant de les utiliser.</p>
-<p>Cette version gère uniquement les listes : aucun compte ne sera bloqué.</p>
+<p>Le blocage est disponible après une confirmation supplémentaire. Il utilise la session X de l’onglet actif.</p>
 <label><input id="understood" type="checkbox"> J’ai compris</label><button id="accept" disabled>Continuer</button>
 </section>
 <main id="app" hidden>
-<p class="badge">Local uniquement · Aucun blocage actif</p>
+<p class="badge">Listes locales · Blocage uniquement sur confirmation</p>
 <form id="create"><label for="name">Nouvelle liste</label><div class="row"><input id="name" maxlength="80" required placeholder="Nom de la liste"><button>Créer</button></div></form>
 <label for="lists">Mes listes</label><select id="lists"><option value="">Aucune liste</option></select>
 <section id="details" hidden>
@@ -19,7 +19,19 @@
 <hr><form id="add"><label for="handle">Ajouter un compte</label><div class="row"><input id="handle" required placeholder="@pseudo ou URL x.com/pseudo"><button>Ajouter</button></div></form>
 <label for="search">Rechercher dans la liste</label><input id="search" type="search" placeholder="Rechercher un pseudo"><p id="count"></p><ul id="accounts"></ul><button id="more" type="button" hidden>Afficher davantage</button>
 </section>
+<section aria-labelledby="blocking-title">
+<h2 id="blocking-title">Blocage contrôlé</h2>
+<p>Ouvrez X dans l’onglet actif et vérifiez le compte connecté. Pendant le traitement, conservez cet onglet ouvert sans l’utiliser. Les commandes restent aussi dans X.</p>
+<label for="delay-min">Délai minimum (secondes, ≥ 8)</label><input id="delay-min" type="number" min="8" max="3600" value="8">
+<label for="delay-max">Délai maximum (secondes)</label><input id="delay-max" type="number" min="8" max="3600" value="20">
+<label for="daily-cap">Plafond quotidien (tentatives)</label><input id="daily-cap" type="number" min="1" max="1000" value="100">
+<button id="prepare-block" type="button">Bloquer cette liste</button>
+<section id="block-confirm" hidden><h3>Confirmer le blocage</h3><p id="block-summary"></p><label><input id="block-consent" type="checkbox"> J’ai vérifié la liste et la session X, et j’accepte le risque.</label><button id="start-block" type="button" disabled>Commencer les blocages</button><button id="cancel-block" type="button">Annuler</button></section>
+<div class="row"><button id="pause-block" type="button">Pause</button><button id="resume-block" type="button">Reprendre</button><button id="stop-block" type="button" class="danger">Arrêter</button></div>
+<p id="run-status" role="status"></p><details><summary>Résultats par compte</summary><ul id="run-results"></ul></details>
+</section>
 </main>
 <p id="status" role="status" aria-live="polite"></p>
 <script type="module" src="app.js"></script>
+<script type="module" src="block-ui.js"></script>
 </body></html>

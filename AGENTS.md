@@ -1,7 +1,11 @@
 # Conventions du projet
 - Extension Manifest V3 sans compilation : sources chargeables dans `extension/`.
 - JavaScript natif avec modules ES, interface en français, thème sombre.
-- Permission `storage` uniquement. Aucun serveur, réseau, télémétrie ou blocage réel pour cette étape.
+- Permissions : `storage` et accès hôte uniquement à `https://x.com/*` et `https://twitter.com/*`. Pas de serveur ni télémétrie. Le blocage utilise exclusivement l’interface visible de X, sans endpoint interne ni clé API.
+- Toute action de blocage exige une confirmation explicite. Garder Pause/Arrêter accessibles dans X et l’extension. Aucun contournement de captcha ou limitation.
+- `queue.js` contient les règles pures (délais, quota, reprise) ; `background.js` sérialise les commandes et persiste la file. Réserver le quota avant toute confirmation irréversible.
+- Tous les sélecteurs et libellés de X sont centralisés dans `selectors.js`. En cas de doute sur un contrôle DOM, échouer sans cliquer.
+- Tester uniquement avec des fixtures ou, manuellement, un compte secondaire et des comptes contrôlés/consentants. Ne jamais lancer de blocages réels automatiquement pendant le développement.
 - Stocker les données dans `chrome.storage.local`, jamais dans le stockage synchronisé.
 - Démarrer avec zéro liste ; ne jamais charger automatiquement les données d’exemple.
 - Utiliser `textContent` pour les données utilisateur ; aucune injection HTML.
