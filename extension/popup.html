@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="fr">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BlockList X</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header><div><h1>BlockList X</h1><p>Vos listes, sur votre appareil.</p></div><button id="options" type="button">Grande vue</button></header>
+<section id="warning" hidden aria-labelledby="warning-title">
+<h2 id="warning-title">Avant de commencer</h2>
+<p>Vous êtes responsable des listes que vous importez. Les blocages en masse peuvent entraîner des limitations de compte par X. Vérifiez vos listes avant de les utiliser.</p>
+<p>Cette version gère uniquement les listes : aucun compte ne sera bloqué.</p>
+<label><input id="understood" type="checkbox"> J’ai compris</label><button id="accept" disabled>Continuer</button>
+</section>
+<main id="app" hidden>
+<p class="badge">Local uniquement · Aucun blocage actif</p>
+<form id="create"><label for="name">Nouvelle liste</label><div class="row"><input id="name" maxlength="80" required placeholder="Nom de la liste"><button>Créer</button></div></form>
+<label for="lists">Mes listes</label><select id="lists"><option value="">Aucune liste</option></select>
+<section id="details" hidden>
+<form id="metadata"><label for="title">Nom</label><input id="title" maxlength="80" required><label for="description">Description</label><textarea id="description" maxlength="5000" rows="3" placeholder="Une note personnelle…"></textarea><div class="row"><button>Enregistrer</button><button id="delete-list" class="danger" type="button">Supprimer la liste</button></div></form>
+<hr><label for="file">Importer un fichier .txt ou .csv</label><input id="file" type="file" accept=".txt,.csv,text/plain,text/csv"><p class="hint">Un pseudo par ligne ou séparé par des virgules. @pseudo et URL x.com/pseudo acceptés. Import ajouté à la liste sélectionnée.</p><button id="export" type="button">Exporter en CSV</button>
+<hr><form id="add"><label for="handle">Ajouter un compte</label><div class="row"><input id="handle" required placeholder="@pseudo ou URL x.com/pseudo"><button>Ajouter</button></div></form>
+<label for="search">Rechercher dans la liste</label><input id="search" type="search" placeholder="Rechercher un pseudo"><p id="count"></p><ul id="accounts"></ul><button id="more" type="button" hidden>Afficher davantage</button>
+</section>
+</main>
+<p id="status" role="status" aria-live="polite"></p>
+<script type="module" src="app.js"></script>
+</body></html>
