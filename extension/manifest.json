@@ -1,9 +1,34 @@
 {
   "manifest_version": 3,
   "name": "BlockList X",
-  "version": "0.1.0",
-  "description": "Gérez vos listes de comptes localement. Aucun blocage à cette étape.",
-  "permissions": ["storage"],
-  "action": {"default_popup": "popup.html"},
-  "options_page": "options.html"
+  "version": "0.2.0",
+  "description": "Gestion locale de listes et blocage contrôlé via l’interface X.",
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "host_permissions": [
+    "https://x.com/*",
+    "https://twitter.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://x.com/*",
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "selectors.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
 }
